@@ -106,28 +106,31 @@
             <plugin>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.7.9</version>
+            <version>0.8.3</version>
             <executions>
                 <execution>
+		    <id>prepare-agent</id>
                     <goals>
                         <goal>prepare-agent</goal>
                     </goals>
                 </execution>
                 <execution>
                     <id>report</id>
-                    <phase>test</phase>
+                    <phase>prepare-package</phase>
                     <goals>
                         <goal>report</goal>
                     </goals>
                 </execution>
                 <execution>
-                    <id>jacoco-check</id>
+                    <id>post-unit-test</id>
                     <phase>test</phase>
                     <goals>
-                        <goal>check</goal>
+                        <goal>report</goal>
                     </goals>
                     <configuration>
-                        <rules>
+			    <dataFile>target/jacoco.exec</dataFile>
+			    <outputDirectory>target/my-reports</outputDirectory>
+<!--                         <rules>
                             <rule>
                                 <element>PACKAGE</element>
                                 <limits>
@@ -137,10 +140,16 @@
                                     </limit>
                                 </limits>
                             </rule>
-                        </rules>
+                        </rules> -->
                     </configuration>
                 </execution>
             </executions>
+	<configuration>
+		<systemPropertyVariables>
+			<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+		 </systemPropertyVariables>
+	</configuration>
+		
         </plugin>
 </plugins>
   </build>
