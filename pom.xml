@@ -180,6 +180,7 @@
 </plugins>
   </build>
 	<!-- added -->
+	<profiles>
 	<profile>
        <id>coverage</id>
        <build>
@@ -211,6 +212,7 @@
         </plugins>
        </build>
      </profile>
+	</profiles>
 	<!-- added -->
 </project>
 
